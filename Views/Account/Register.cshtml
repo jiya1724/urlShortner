@@ -1,0 +1,40 @@
+@model UrlShortener.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Sign Up";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link href="~/css/account.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<div class="auth-page">
+  <div class="auth-card">
+    <h1>Create Account</h1>
+    <form method="post" asp-controller="Account" asp-action="Register" class="auth-form">
+      <div>
+        <input asp-for="Username" placeholder="Username" class="form-input" />
+        <span asp-validation-for="Username" class="input-validation-error"></span>
+      </div>
+      <div>
+        <input asp-for="Email" placeholder="Email" class="form-input" />
+        <span asp-validation-for="Email" class="input-validation-error"></span>
+      </div>
+      <div>
+        <input asp-for="Password" placeholder="Password" class="form-input" />
+        <span asp-validation-for="Password" class="input-validation-error"></span>
+      </div>
+      <div>
+        <input asp-for="ConfirmPassword" placeholder="Confirm Password" class="form-input" />
+        <span asp-validation-for="ConfirmPassword" class="input-validation-error"></span>
+      </div>
+      <button type="submit" class="btn-primary">Sign Up</button>
+    </form>
+    <partial name="_ValidationScriptsPartial" />
+    <p>
+      Already have an account?
+      <a asp-controller="Account" asp-action="Login">Log in</a>
+    </p>
+  </div>
+</div>

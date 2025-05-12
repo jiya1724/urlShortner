@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "URL Shortened!";
+    Layout = "_Layout";
+}
+
+<div class="main-content">
+    <div class="main-card text-center">
+        <h1>URL Shortened!</h1>
+        <div class="mb-3">
+            <input type="text" class="form-input text-center" value="@ViewBag.ShortUrl" id="shortUrlBox" readonly style="font-size:1.2rem;" />
+            <button class="btn btn-primary mt-2" onclick="copyShortUrl()">Copy</button>
+        </div>
+        <a asp-action="MyUrls" class="btn btn-outline-primary mt-3">View My URLs</a>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+function copyShortUrl() {
+    var copyText = document.getElementById("shortUrlBox");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    alert("Copied: " + copyText.value);
+}
+</script>
+} 

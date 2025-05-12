@@ -1,0 +1,102 @@
+@model IEnumerable<UrlShortener.Models.ShortUrl>
+@{
+    ViewData["Title"] = "My Shortened URLs";
+    Layout = "_Layout";
+    var baseUrl = $"{Context.Request.Scheme}://{Context.Request.Host}";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+}
+
+<div class="main-content">
+    <div class="main-card">
+        <h1>My Shortened URLs</h1>
+        @if (!Model.Any())
+        {
+            <p class="pt">You haven't shortened any URLs yet.</p>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Original URL</th>
+                            <th>Short URL</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var url in Model)
+                        {
+                            <tr>
+                                <td style="max-width: 300px; word-break: break-all;">
+                                    <a href="@url.OriginalUrl" target="_blank">@url.OriginalUrl</a>
+                                </td>
+                                <td>
+                                    <a href="@($"{baseUrl}/s/{url.ShortCode}")" target="_blank">@($"{baseUrl}/s/{url.ShortCode}")</a>
+                                </td>
+                                <td>@url.CreatedAt.ToLocalTime().ToString("g")</td>
+                                <td>
+                                    <form asp-action="Delete" asp-route-id="@url.Id" method="post" class="d-inline" onsubmit="return confirmDelete(event)">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">Shorten Another URL</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+            const form = event.target;
+            
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+                customClass: {
+                    title: 'swal2-title-large',
+                    htmlContainer: 'swal2-html-large',
+                    confirmButton: 'swal2-btn-large',
+                    cancelButton: 'swal2-btn-large'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+            
+            return false;
+        }
+    </script>
+    <style>
+        .swal2-title-large {
+            font-size: 2rem !important;
+        }
+        .swal2-html-large {
+            font-size: 2rem !important;
+        }
+        .swal2-btn-large {
+            font-size: 2rem !important;
+            padding: 0.75em 2em !important;
+        }
+    </style>
+} 

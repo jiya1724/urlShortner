@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="main-content">
+    <div class="main-card">
+        <h1>URL Shortener</h1>
+
+        <form asp-action="ShortenUrl" method="post" class="url-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <input type="url" 
+                       name="originalUrl" 
+                       class="form-input" 
+                       placeholder="Enter the URL to shorten" 
+                       required />
+                <span class="input-validation-error"></span>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Shorten URL</button>
+        </form>
+
+        @if (ViewBag.ShortUrl != null)
+        {
+            <div class="mt-4">
+                <h3>Your shortened URL:</h3>
+                <div class="input-group">
+                    <input type="text" 
+                           class="form-control" 
+                           value="@ViewBag.ShortUrl" 
+                           id="shortUrlBox" 
+                           readonly />
+                    <button class="btn btn-outline-secondary" 
+                            type="button" 
+                            onclick="copyShortUrl()">
+                        Copy
+                    </button>
+                </div>
+            </div>
+        }
+
+        <div class="mt-4">
+            <a asp-controller="ShortUrl" asp-action="MyUrls" class="btn btn-outline-primary">
+                View My URLs
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function copyShortUrl() {
+            var copyText = document.getElementById("shortUrlBox");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+            alert("Copied: " + copyText.value);
+        }
+    </script>
+}

@@ -1,0 +1,109 @@
+/* ---- Auth Base ---- */
+.auth-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ---- Auth Card ---- */
+.auth-card {
+  margin-top: 25%;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 60%;
+  padding: 2.5rem 2rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  color: #000000;
+  transition: transform 0.3s ease;
+  position: relative;
+  top: -100px;
+}
+
+.auth-card:hover {
+  transform: scale(1.015);
+}
+
+/* ---- Header ---- */
+.auth-card h1 {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #000000;
+}
+
+/* ---- Form ---- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-input {
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(52, 52, 52, 0.25);
+  border-radius: 0.5rem;
+  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #000000;
+  width: 100%;
+}
+
+.form-input::placeholder {
+  color: #575757;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.4);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ---- Button ---- */
+.btn-primary {
+  padding: 0.9rem;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+
+
+/* ---- Error & Link ---- */
+.input-validation-error {
+  color: #f87171;
+  font-size: 1.2rem;
+}
+
+.auth-card p {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 2rem;
+}
+
+.auth-card a {
+  color: #001aff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease-in-out;
+}
+
+.auth-card a:hover {
+  text-decoration: underline;
+}
